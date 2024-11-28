@@ -1,0 +1,57 @@
+/*drop database se_liga_bd;*/
+
+create database se_liga_bd;
+
+use se_liga_bd;
+
+create table usuario(
+		pk int not null auto_increment, primary key(pk),
+    	idade int not null,
+    	nome varchar(255) not null, 
+    	genero varchar (255) 
+);
+
+create table roupa(
+		pk int not null auto_increment, primary key(pk),
+	cor varchar(255) not null, 
+        marca varchar(255),
+	modelagem varchar(255) not null,
+	tipo varchar(255) not null,
+	usuario_fk int, foreign key(usuario_fk) references usuario(pk)
+);
+
+create table roupa_cima(
+		pk int not null auto_increment, primary key(pk),
+    	modelagem varchar(255) not null,
+	tecido varchar(255) not null,
+	estampa varchar(255) not null,
+	roupa_fk int, foreign key(roupa_fk) references roupa(pk) 
+    );
+
+create table roupa_baixo(
+		pk int not null auto_increment, primary key(pk),
+	tecido varchar(255) not null,
+	caimento varchar(255),
+	cor varchar(255) not null,
+	roupa_fk int, foreign key(roupa_fk) references roupa(pk) 
+    );
+
+create table sapato(
+		pk int not null auto_increment, primary key(pk),
+	tecido varchar(255) not null,
+	cor varchar(255) not null,
+	modelo varchar(255) not null,
+	roupa_fk int, foreign key(roupa_fk) references roupa(pk) 
+    );
+
+
+insert usuario ( idade, nome, genero) values ( 18 ,"Fernanda", "Feminina");
+insert usuario ( idade, nome, genero) values ( 17 ,"João", "Masculino");
+insert usuario ( idade, nome, genero) values ( 14 ,"Amanda", "Feminina");
+
+update usuario set nome= "Fernanda" where pk=2;
+update usuario set nome= "Amanda" where pk=4;
+
+
+select * from usuario;
+
